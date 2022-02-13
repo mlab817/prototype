@@ -8,6 +8,7 @@ use App\Models\File;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -48,8 +49,9 @@ class StudentController extends Controller
     }
 
     public function displayStudentDashboard() {
-        $groups = Group::all();
-        $files = File::all();
+        $groups   = Group::all();
+        // $files = File::all();
+        $files    = Auth::user()->files;
         return view('/dashboard', compact('groups', 'files'));
     }
 }
