@@ -81,9 +81,7 @@
                         <tbody>
                         @foreach ($files as $file)
                             <tr>
-                                @if (Auth::user()->id == )
-                                    <td>{{ $file->name }}</td>
-                                @endif
+                                <td>{{ $file->name }}</td>
                             </tr>
                         @endforeach
                         </tbody>
