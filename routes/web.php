@@ -40,6 +40,12 @@ Route::controller(StudentController::class)->group(
         })->name('members');
 
         Route::post('/members', 'membersCreate');
+
+        Route::middleware(['auth:sanctum', 'verified'])->get('/classroom', function () {
+            return view('student.classroom');
+        })->name('classroom');
+
+        Route::post('/classroom', 'searchRoom');
     }
 );
 

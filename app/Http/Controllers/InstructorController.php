@@ -17,7 +17,7 @@ class InstructorController extends Controller
     	$data->rname = $request->input('name');
     	$data->rkey = $request->input('key');
     	$data->description = $request->input('desc');
-    	$data->user_id = $request->input('user_id');
+    	//$data->user_id = $request->input('user_id');
     	$data->save();
 
     	return redirect()->back()->with('status', 'Room Added Successfully');

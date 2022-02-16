@@ -44,7 +44,6 @@
                         <thead>
                         <tr>
                             <th scope="col">Group Name</th>
-                            <th scope="col">ID</th>
                             <th scope="col">Mem 1</th>
                             <th scope="col">Mem 2</th>
                             <th scope="col">Mem 3</th>
@@ -54,14 +53,11 @@
                         <tbody>
                         @foreach ($groups as $group)
                         <tr>
-                            @if ($group->id == Auth::user()->id)
                                 <td>{{ $group->group_name }}</td>
-                                <td>{{ $group->user_id }}</td>
                                 <td>{{ $group->member1 }}</td>
                                 <td>{{ $group->member2 }}</td>
                                 <td>{{ $group->member3 }}</td>
                                 <td>{{ $group->member4 }}</td>
-                            @endif
                         </tr>
                         @endforeach
                         </tbody>

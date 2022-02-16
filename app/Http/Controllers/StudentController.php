@@ -6,6 +6,8 @@ use App\Models\Group;
 
 use App\Models\File;
 
+use App\Models\Room;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -49,9 +51,18 @@ class StudentController extends Controller
     }
 
     public function displayStudentDashboard() {
-        $groups   = Group::all();
+        //$groups   = Group::all();
         // $files = File::all();
+        $groups = Auth::user()->groups;
         $files    = Auth::user()->files;
         return view('/dashboard', compact('groups', 'files'));
+    }
+
+    public function searchRoom(Request $request) {
+        $term = $request->input('search_room');
+        $filterData = Room::where('rname','LIKE','%'.$term.'%')
+            ->get();
+        dd($filterData);
+        //return view('student.classroom', compact('filterData'));
     }
 }
