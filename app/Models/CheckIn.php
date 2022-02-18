@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
 
-class Enroll extends Model
+class CheckIn extends Model
 {
     use HasFactory;
 
@@ -26,6 +26,4 @@ class Enroll extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
 }

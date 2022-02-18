@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Enroll;
+use App\Models\CheckIn;
 use App\Models\Group;
 
-use App\Models\File;
+use App\Models\Submission;
 
 use App\Models\Room;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -43,14 +46,16 @@ class StudentController extends Controller
     public function fileUpload(Request $req) {
 
         $req->validate([
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
+            'file' => 'required|mimes:csv,docx,txt,xlx,xls,pdf|max:2048'
         ]);
-        $fileModel = new File;
+        $fileModel = new Submission;
         $fileModel->user_id = $req->input('user_id');
+        $room = Auth::user()->room;
+        $fileModel->room_id = Room::where('user_id','LIKE','%'.$room.'%')->first();
         if($req->file()) {
-            $fileName = time().'_'.$req->file->getClientOriginalName();
+            $fileName = $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
-            $fileModel->name = time().'_'.$req->file->getClientOriginalName();
+            $fileModel->name = $req->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->save();
             return back()
@@ -60,19 +65,23 @@ class StudentController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function displayStudentDashboard() {
         //$groups   = Group::all();
         // $files = File::all();
+        $user = Auth::user();
         $groups = Auth::user()->groups;
-        $files    = Auth::user()->files;
-        return view('/dashboard', compact('groups', 'files'));
+        $files    = Auth::user()->file;
+        $rooms = Room::where('user_id', 'LIKE', '%'. $user->id. '%')->get();
+        //$rooms = Auth::user()->rooms;
+        dd($rooms);
+        //return view('/dashboard', compact('groups', 'files', 'rooms'));
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function searchRoom(Request $request) {
         $term = $request->input('search_room');
@@ -84,26 +93,22 @@ class StudentController extends Controller
 
     public function joinRoom(Request $request) {
 
-        $enroll = new enroll;
+        $enroll = new checkin;
 
         $key = $request->input('mykey');
-        $findKey = Room::where('rkey','LIKE','%'.$key.'%')
-            ->get();
+        $findKey = Room::where('rkey','LIKE','%'.$key.'%')->first();
 
         if($findKey == true){
             //$rooms = Auth::user()->rooms;
             $enroll->room_id = $findKey->id;
             $enroll->user_id = $request->input('user_id');
             $enroll->save();
-            dd($enroll->room_id);
-//            return back()
-//                ->with('success','You Successfully Join.');
+            //dd($enroll->room_id);
+            return back()
+                ->with('success','You Successfully Join.');
         }
-
-
-
-
     }
+
 
 
 }

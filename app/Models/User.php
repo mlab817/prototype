@@ -10,7 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Models\Enroll;
+use App\Models\Submission;
 
 use App\Models\Room;
 
@@ -72,7 +72,7 @@ class User extends Authenticatable
      */
     public function files()
     {
-        return $this->hasMany(File::class);
+        return $this->hasMany(Submission::class);
     }
 
     /**
@@ -88,9 +88,9 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function enrolls()
+    public function check_ins()
     {
-        return $this->hasMany(Enroll::class);
+        return $this->hasMany(CheckIn::class);
     }
 
     /**

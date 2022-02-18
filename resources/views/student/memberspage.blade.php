@@ -45,7 +45,6 @@
             </div>
             <input type="text" class="form-control" name="user_id" value="{{ Auth::user()->id }}" hidden>
             <br>
-            <input type="text" class="form-control" name="user_id" value="{{ Auth::user()->id }}" hidden>
             <button class="btn btn-success" type="submit" style="background-color: green">Create</button>
         </form>
     </div>

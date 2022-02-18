@@ -24,6 +24,11 @@
                                 </div>
                             @endif
                             <div class="form-group">
+                                <select>
+                                        @foreach($rooms as $room)
+                                            <option>{{ $room->rname }}</option>
+                                        @endforeach
+                                </select>
                                 <label for="exampleFormControlFile1">Upload your file here</label>
                                 <input type="text" class="form-control" name="user_id" value="{{ Auth::user()->id }}" hidden>
                                 <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
@@ -75,11 +80,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($files as $file)
-                            <tr>
-                                <td>{{ $file->name }}</td>
-                            </tr>
-                        @endforeach
+                        @if (is_array($files))
+                            @foreach ($files as $file)
+                                <tr>
+                                    <td>{{ $file->name }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+
                         </tbody>
                     </table>
                 </div>

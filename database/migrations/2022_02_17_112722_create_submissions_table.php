@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enrolls', function (Blueprint $table) {
+        Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('room_id');
+            $table->string('name')->nullable();
+            $table->string('file_path')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -40,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrolls');
+        Schema::dropIfExists('submissions');
     }
 };
