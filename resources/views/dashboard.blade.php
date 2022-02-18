@@ -25,9 +25,11 @@
                             @endif
                             <div class="form-group">
                                 <select>
-                                        @foreach($checkins as $chekin)
-                                            <option>{{ $chekin->room->rname }}</option>
-                                        @endforeach
+                                        @if(isset($check_ins))
+                                            @foreach($check_ins as $chekin)
+                                                <option>{{ $chekin->room->rname }}</option>
+                                            @endforeach
+                                        @endif
                                 </select>
                                 <label for="exampleFormControlFile1">Upload your file here</label>
                                 <input type="text" class="form-control" name="user_id" value="{{ Auth::user()->id }}" hidden>

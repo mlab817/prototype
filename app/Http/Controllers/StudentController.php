@@ -73,16 +73,9 @@ class StudentController extends Controller
         $user = Auth::user();
         $groups = Auth::user()->groups;
         $files    = Auth::user()->file;
-        //$rooms = Room::where('user_id', 'LIKE', '%'. $user->id. '%')->get();
-        //$rooms = Auth::user()->rooms;
-        //dd($rooms);
-
-        //$checkins = $user->checkins;
-        //dd($checkins);
-        //$check_ins = CheckIn::where('user_id', 'LIKE', '%'. $user->id. '%')->get();
-        $checkins = $user->check_ins;
-        dd($checkins);
-        //return view('/dashboard', compact('groups', 'files', 'rooms'));
+        $check_ins = $user->check_ins;
+        //hello
+        return view('/dashboard', compact('groups', 'files', 'check_ins'));
     }
 
     /**

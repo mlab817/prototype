@@ -90,14 +90,7 @@ class User extends Authenticatable
      */
     public function check_ins()
     {
-        return $this->hasMany(CheckIn::class);
+        return $this->hasMany(CheckIn::class, 'user_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function rooms()
-    {
-        return $this->belongsToMany(Room::class, 'user_id', 'room_id');
-    }
 }
