@@ -12,14 +12,18 @@ class Room extends Model
     protected $table = 'rooms';
 
     protected $fillable = [
-        'user_id',
         'rname',
         'rkey',
         'description',
     ];
 
-    public function user()
+//    public function user()
+//    {
+//    	return $this->belongsTo(User::class);
+//    }
+
+    public function rooms()
     {
-    	return $this->belongsTo(User::class);
+        return $this->belongsTo(Room::class);
     }
 }

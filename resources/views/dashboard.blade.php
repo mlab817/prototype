@@ -25,8 +25,8 @@
                             @endif
                             <div class="form-group">
                                 <select>
-                                        @foreach($rooms as $room)
-                                            <option>{{ $room->rname }}</option>
+                                        @foreach($checkins as $chekin)
+                                            <option>{{ $chekin->room->rname }}</option>
                                         @endforeach
                                 </select>
                                 <label for="exampleFormControlFile1">Upload your file here</label>

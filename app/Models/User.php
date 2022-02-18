@@ -98,6 +98,6 @@ class User extends Authenticatable
      */
     public function rooms()
     {
-        return $this->hasMany(Room::class);
+        return $this->belongsToMany(Room::class, 'user_id', 'room_id');
     }
 }
