@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
+// similar to my comment in instructor controller
+// use another controller for Groups, i.e. GroupController
+// for files, you can do FileController
 class StudentController extends Controller
 {
     /**
@@ -72,8 +75,9 @@ class StudentController extends Controller
         // $files = File::all();
         $user = Auth::user();
         $groups = Auth::user()->groups;
-        $files    = Auth::user()->file;
+        $files    = Auth::user()->file; // this should be files, not file
         $check_ins = $user->check_ins;
+        
         //hello
         return view('/dashboard', compact('groups', 'files', 'check_ins'));
     }

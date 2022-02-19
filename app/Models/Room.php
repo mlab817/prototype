@@ -17,13 +17,14 @@ class Room extends Model
         'description',
     ];
 
-//    public function user()
-//    {
-//    	return $this->belongsTo(User::class);
-//    }
-
-    public function rooms()
+    public function user()
     {
-        return $this->belongsTo(Room::class);
+    	return $this->belongsTo(User::class);
+    }
+
+    // add this function so you can retrieve number of checkins per room
+    public function check_ins()
+    {
+        return $this->belongsToMany(CheckIn::class);
     }
 }
